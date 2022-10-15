@@ -51,7 +51,8 @@ class PyDraw:
     def save_file(self):
         image_name = input("Enter Filename with extension: ")
         full_path = "drawings/" + image_name
-        pygame.image.save(self.screen, full_path)
+        draw_area = self.screen.subsurface(self.draw_rect).copy()
+        pygame.image.save(draw_area, full_path)
 
     def load_file(self):
         image_name = input("Enter Filename with extension: ")
@@ -59,7 +60,7 @@ class PyDraw:
         background = pygame.image.load(full_path)
         background_rect = background.get_rect()
         self.set_screen_size(background_rect[2], background_rect[3])
-        self.screen.blit(background, self.screen_rect)
+        self.screen.blit(background, self.draw_rect)
 
     def draw(self):
         x, y = pygame.mouse.get_pos()
