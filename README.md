@@ -11,7 +11,7 @@ simple paint-like program in python
 * eraser (pressing DEL) ✅
 * save paintings (as png/jpg) ✅
 * reopen paintings and overdraw them (save as new) ✅
-* tooltips and shortcuts
+* tooltips and shortcuts ✅
 
 ## Feature Creep
 * shapes

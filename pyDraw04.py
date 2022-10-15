@@ -1,5 +1,5 @@
 import pygame
-import conf
+from config import conf
 import random
 
 
