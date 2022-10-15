@@ -31,15 +31,16 @@ class PyDraw:
         self.draw_rect = pygame.Rect(0, self.toolbox_height, self.screen_width,
                                      self.screen_height - self.toolbox_height)
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height), 0, 32)
-        self.set_fill_screen()
 
-    def set_fill_screen(self, color=(255, 255, 255)):
-        self.background_color = color
-        self.screen.fill(self.toolbox_color, self.toolbox_rect)
+        self.fill_draw_area()
         self.draw_toolbox()
+
+    def fill_draw_area(self, color=(255, 255, 255)):
+        self.background_color = color
         self.screen.fill(self.background_color, self.draw_rect)
 
     def draw_toolbox(self):
+        self.screen.fill(self.toolbox_color, self.toolbox_rect)
         font_size = 25
         font = pygame.font.SysFont('ComicNeue', font_size)
         font_color = (255, 255, 255)
@@ -67,6 +68,7 @@ class PyDraw:
         if x != self.mouse_pos_x or y != self.mouse_pos_y:
             if self.mouse_pos_x >= 0 and self.draw_rect.collidepoint(x, y):
                 pygame.draw.line(self.screen, self.pencil_color, (self.mouse_pos_x, self.mouse_pos_y), (x, y), self.brush_size)
+                self.draw_toolbox()
             self.mouse_pos_x = x
             self.mouse_pos_y = y
 
@@ -103,7 +105,7 @@ class PyDraw:
                         new_screen_height = int(input("Enter new Screen Height: "))
                         self.set_screen_size(new_screen_width, new_screen_height)
                     elif event.key == pygame.K_f:
-                        self.set_fill_screen(self.pencil_color)
+                        self.fill_draw_area(self.pencil_color)
                     elif event.key == pygame.K_s:
                         self.save_file()
                     elif event.key == pygame.K_l:
